@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            text-align: center;
+            background-color: #333;
+            color: white;
+            padding: 1em 0;
+        }
+        h1 {
+            margin: 0;
+        }
+        section {
+            margin: 2em auto;
+            width: 80%;
+            text-align: center;
+        }
+        .introduction {
+            background-color: #fff;
+            padding: 2em;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-bottom: 2em;
+        }
+        .slideshow-container {
+            max-width: 80%;
+            position: relative;
+            margin: 2em auto;
+        }
+        .slides {
+            display: none;
+            width: 100%;
+            border-radius: 10px;
+        }
+        .active {
+            display: block;
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .thumbnail-container {
+            text-align: center;
+            margin: 2em 0;
+        }
+        .thumbnail {
+            width: 100px;
+            height: auto;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 0 5px;
+        }
+        .thumbnail:hover {
+            opacity: 0.7;
+        }
+        #imageModal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        #modalContent {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+        #imageModal img {
+            width: 100%;
+            height: auto;
+        }
+        #imageModal .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        #imageModal .close:hover,
+        #imageModal .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Photography Portfolio</h1>
+</header>
+
+<section class="introduction">
+    <h2>About Me</h2>
+    <p>Hello, I am a passionate photographer with a love for capturing moments and telling stories through my lens. I specialize in portrait and landscape photography, always striving to find beauty in every detail.</p>
+</section>
+
+<div class="slideshow-container">
+    <img src="image1.jpg" class="slides active" alt="Photo 1">
+    <img src="image2.jpg" class="slides" alt="Photo 2">
+    <img src="image3.jpg" class="slides" alt="Photo 3">
+
+    <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+    <a class="next" onclick="changeSlide(1)">&#10095;</a>
+</div>
+
+<div class="thumbnail-container">
+    <img src="image1.jpg" class="thumbnail" onclick="openModal('image1.jpg')" alt="Thumbnail 1">
+    <img src="image2.jpg" class="thumbnail" onclick="openModal('image2.jpg')" alt="Thumbnail 2">
+    <img src="image3.jpg" class="thumbnail" onclick="openModal('image3.jpg')" alt="Thumbnail 3">
+</div>
+
+<div id="imageModal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img id="modalContent" src="" alt="Enlarged Photo">
+</div>
+
+<script>
+    let slideIndex = 0;
+
+    function changeSlide(n) {
+        const slides = document.getElementsByClassName("slides");
+        slides[slideIndex].classList.remove("active");
+        slideIndex = (slideIndex + n + slides.length) % slides.length;
+        slides[slideIndex].classList.add("active");
+    }
+
+    function openModal(imageSrc) {
+        document.getElementById("imageModal").style.display = "block";
+        document.getElementById("modalContent").src = imageSrc;
+    }
+
+    function closeModal() {
+        document.getElementById("imageModal").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
